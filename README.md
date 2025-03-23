@@ -36,7 +36,7 @@ This is a simple GPA Calculator built with React. It allows users to enter cours
 
 ## Usage
 
-1. Open the application in a browser at ``.
+1. Open the application in a browser at `https://fast-gpa-calculator.vercel.app/`.
 2. Enter course details:
    - Course name
    - Credit hours (1-3)
