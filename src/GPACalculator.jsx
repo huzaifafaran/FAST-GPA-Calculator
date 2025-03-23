@@ -6,6 +6,7 @@ const GRADE_POINTS = {
   'C+': 2.33, 'C': 2, 'C-': 1.67,
   'D+': 1.33, 'D': 1
 };
+
 const Footer = () => {
   return (
     <footer className="mt-8 py-4 text-center text-slate-400">
@@ -20,34 +21,35 @@ const Footer = () => {
     </footer>
   );
 };
+
 const CourseRow = ({ course, onChange, onRemove, isRemovable }) => {
   const handleChange = (field, value) => {
     onChange(course.id, field, value);
   };
 
   return (
-    <div className="mb-4 p-6 bg-slate-800/30 backdrop-blur-sm rounded-xl border border-slate-600/50 shadow-xl hover:shadow-2xl transition-all duration-300">
-      <div className="grid grid-cols-12 gap-4 items-start">
-        {/* Course Name */}
+    <div className="mb-4 p-4 md:p-6 bg-slate-800/30 backdrop-blur-sm rounded-xl border border-slate-600/50 shadow-xl hover:shadow-2xl transition-all duration-300">
+      {/* Mobile: Stacked layout, Desktop: Grid */}
+      <div className="grid grid-cols-12 gap-3 md:gap-4 items-start">
+        {/* Course Name - Full width on mobile */}
         <div className="col-span-12 md:col-span-4">
           <input
             type="text"
             value={course.name}
             onChange={(e) => handleChange('name', e.target.value)}
-            onBlur={(e) => handleChange('name', e.target.value)}
-            className={`w-full p-3 bg-slate-700/20 border-2 border-slate-600/30 rounded-lg 
+            className={`w-full p-2 md:p-3 text-sm md:text-base bg-slate-700/20 border-2 rounded-lg 
               text-slate-100 placeholder-slate-400 focus:border-blue-400/50 focus:ring-2 
               focus:ring-blue-400/20 focus:outline-none transition-all ${
-                course.errors?.name ? 'border-red-400/60' : ''
+                course.errors?.name ? 'border-red-400/60' : 'border-slate-600/30'
               }`}
             placeholder="Course Name"
           />
           {course.errors?.name && (
-            <p className="text-red-400/80 text-sm mt-2 ml-1">{course.errors.name}</p>
+            <p className="text-red-400/80 text-xs md:text-sm mt-1 md:mt-2 ml-1">{course.errors.name}</p>
           )}
         </div>
 
-        {/* Credit Hours */}
+        {/* Credit Hours & Grade - Side by side on mobile */}
         <div className="col-span-6 md:col-span-3">
           <input
             type="number"
@@ -55,27 +57,26 @@ const CourseRow = ({ course, onChange, onRemove, isRemovable }) => {
             max="3"
             value={course.creditHours}
             onChange={(e) => handleChange('creditHours', e.target.value)}
-            className={`w-full p-3 bg-slate-700/20 border-2 border-slate-600/30 rounded-lg 
+            className={`w-full p-2 md:p-3 text-sm md:text-base bg-slate-700/20 border-2 rounded-lg 
               text-slate-100 placeholder-slate-400 focus:border-blue-400/50 focus:ring-2 
               focus:ring-blue-400/20 focus:outline-none transition-all ${
-                course.errors?.creditHours ? 'border-red-400/60' : ''
+                course.errors?.creditHours ? 'border-red-400/60' : 'border-slate-600/30'
               }`}
             placeholder="Credits"
           />
           {course.errors?.creditHours && (
-            <p className="text-red-400/80 text-sm mt-2 ml-1">{course.errors.creditHours}</p>
+            <p className="text-red-400/80 text-xs md:text-sm mt-1 md:mt-2 ml-1">{course.errors.creditHours}</p>
           )}
         </div>
 
-        {/* Grade Dropdown */}
         <div className="col-span-6 md:col-span-3">
           <select
             value={course.grade}
             onChange={(e) => handleChange('grade', e.target.value)}
-            className={`w-full p-3 bg-slate-700/20 border-2 border-slate-600/30 rounded-lg 
+            className={`w-full p-2 md:p-3 text-sm md:text-base bg-slate-700/20 border-2 rounded-lg 
               text-slate-100 focus:border-blue-400/50 focus:ring-2 focus:ring-blue-400/20 
               focus:outline-none transition-all appearance-none ${
-                course.errors?.grade ? 'border-red-400/60' : ''
+                course.errors?.grade ? 'border-red-400/60' : 'border-slate-600/30'
               }`}
           >
             <option value="" className="bg-slate-800">Select Grade</option>
@@ -84,16 +85,16 @@ const CourseRow = ({ course, onChange, onRemove, isRemovable }) => {
             ))}
           </select>
           {course.errors?.grade && (
-            <p className="text-red-400/80 text-sm mt-2 ml-1">{course.errors.grade}</p>
+            <p className="text-red-400/80 text-xs md:text-sm mt-1 md:mt-2 ml-1">{course.errors.grade}</p>
           )}
         </div>
 
-        {/* Remove Button */}
-        <div className="col-span-12 md:col-span-2">
+        {/* Remove Button - Full width on mobile */}
+        <div className="col-span-12 md:col-span-2 mt-2 md:mt-0">
           <button
             onClick={() => onRemove(course.id)}
             disabled={!isRemovable}
-            className="w-full py-3 bg-gradient-to-br from-red-500/90 to-red-600/90 hover:from-red-600/90 
+            className="w-full py-2 md:py-3 text-sm md:text-base bg-gradient-to-br from-red-500/90 to-red-600/90 hover:from-red-600/90 
               hover:to-red-700/90 text-white rounded-lg disabled:opacity-40 disabled:pointer-events-none 
               transition-all shadow-md hover:shadow-lg font-medium"
           >
@@ -202,20 +203,21 @@ const GPACalculator = () => {
   }, [courses]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4 md:p-6">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-8 flex justify-between items-center p-6 bg-slate-800/30 backdrop-blur-sm rounded-xl border border-slate-600/50 shadow-2xl">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+        {/* Mobile: Stacked header, Desktop: Flex row */}
+        <div className="mb-6 md:mb-8 flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-center p-4 md:p-6 bg-slate-800/30 backdrop-blur-sm rounded-xl border border-slate-600/50 shadow-2xl">
+          <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent text-center md:text-left">
             GPA CALCULATOR
           </h1>
           <button
             onClick={addCourse}
             disabled={courses.length >= 10}
-            className="px-6 py-3 bg-gradient-to-br from-blue-500/90 to-purple-600/90 hover:from-blue-600/90 
+            className="w-full md:w-auto px-4 md:px-6 py-2 md:py-3 text-sm md:text-base bg-gradient-to-br from-blue-500/90 to-purple-600/90 hover:from-blue-600/90 
               hover:to-purple-700/90 text-white rounded-lg disabled:opacity-40 disabled:pointer-events-none 
-              transition-all shadow-md hover:shadow-lg flex items-center gap-2 font-medium"
+              transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium"
           >
-            <span className="text-xl">+</span> Add Course
+            <span className="text-lg md:text-xl">+</span> Add Course
           </button>
         </div>
         
@@ -229,10 +231,10 @@ const GPACalculator = () => {
           />
         ))}
         
-        <div className="mt-8 p-6 bg-slate-800/30 backdrop-blur-sm rounded-xl border border-slate-600/50 shadow-2xl">
-          <h2 className="text-2xl font-semibold text-slate-100">
+        <div className="mt-6 md:mt-8 p-4 md:p-6 bg-slate-800/30 backdrop-blur-sm rounded-xl border border-slate-600/50 shadow-2xl">
+          <h2 className="text-xl md:text-2xl font-semibold text-slate-100 text-center md:text-left">
             {hasErrors ? (
-              <span className="text-red-400/80">
+              <span className="text-red-400/80 text-sm md:text-base">
                 ⚠️ Please resolve all validation errors to calculate GPA
               </span>
             ) : (
@@ -245,8 +247,9 @@ const GPACalculator = () => {
             )}
           </h2>
         </div>
+        
+        <Footer />
       </div>
-      <Footer/>
     </div>
   );
 };
