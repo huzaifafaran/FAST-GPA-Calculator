@@ -6,7 +6,20 @@ const GRADE_POINTS = {
   'C+': 2.33, 'C': 2, 'C-': 1.67,
   'D+': 1.33, 'D': 1, 'E+': 0.67, 'E': 0, 'E-': 0
 };
-
+const Footer = () => {
+  return (
+    <footer className="mt-8 py-4 text-center text-slate-400">
+      <div className="border-t border-slate-600/50 pt-4">
+        <p className="text-sm">
+          Designed and Developed by{" "}
+          <span className="font-medium text-blue-400/80 hover:text-purple-400/90 transition-colors">
+            Huzaifa Faran
+          </span>
+        </p>
+      </div>
+    </footer>
+  );
+};
 const CourseRow = ({ course, onChange, onRemove, isRemovable }) => {
   const handleChange = (field, value) => {
     onChange(course.id, field, value);
@@ -233,6 +246,7 @@ const GPACalculator = () => {
           </h2>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };
