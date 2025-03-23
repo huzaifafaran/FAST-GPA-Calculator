@@ -21,7 +21,7 @@ This is a simple GPA Calculator built with React. It allows users to enter cours
 1. Clone the repository:
    ```sh
    git clone https://github.com/huzaifafaran/FAST-GPA-Calculator.git
-   cd gpa-calculator
+   cd FAST-GPA-Calculator
    ```
 
 2. Install dependencies:
